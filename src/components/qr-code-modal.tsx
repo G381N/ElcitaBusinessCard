@@ -31,7 +31,7 @@ export function QRCodeModal({ isOpen, onOpenChange, url }: QRCodeModalProps) {
         margin: 2,
         width: 300,
         color: {
-          dark: "#007a3d",
+          dark: "#1a73e8", // primary color
           light: "#FFFFFF",
         }
       })
@@ -63,7 +63,7 @@ export function QRCodeModal({ isOpen, onOpenChange, url }: QRCodeModalProps) {
           )}
         </div>
         <DialogFooter>
-          <Button asChild className="w-full bg-gradient-to-r from-[#4ac94a] to-[#007a3d] text-white hover:text-white">
+          <Button asChild className="w-full">
             <a href={qrCodeDataUrl} download="elcita-card-qr.png">
               <Download className="mr-2 h-4 w-4" />
               Download QR

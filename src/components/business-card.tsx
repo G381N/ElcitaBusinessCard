@@ -63,33 +63,33 @@ export function BusinessCard({
 
   return (
     <>
-      <Card className="w-full max-w-md mx-auto rounded-3xl shadow-2xl overflow-hidden border-2 border-primary/10 bg-white/80 backdrop-blur-sm">
+      <Card className="w-full max-w-md mx-auto rounded-3xl shadow-lg overflow-hidden border-border bg-card">
         <CardContent className="p-0">
-          <div className="bg-gradient-to-br from-green-50 via-white to-green-100 p-8 flex flex-col items-center text-center">
+          <div className="p-8 flex flex-col items-center text-center">
             <div className="relative mb-4">
               <Image
                 src={photoUrl}
                 alt={`Photo of ${name}`}
                 width={144}
                 height={144}
-                className="rounded-full border-4 border-white shadow-lg"
+                className="rounded-full border-4 border-white shadow-lg dark:border-slate-800"
                 data-ai-hint="portrait person"
               />
                <div
                 onClick={() => setQrModalOpen(true)}
-                className="absolute bottom-0 right-0 bg-white rounded-full p-2 cursor-pointer shadow-md hover:bg-gray-100 transition-colors"
+                className="absolute bottom-0 right-0 bg-white dark:bg-slate-800 rounded-full p-2 cursor-pointer shadow-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                 title="Show QR Code"
               >
                 <QrCode className="h-6 w-6 text-primary" />
               </div>
             </div>
-            <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
+            <h1 className="text-3xl font-bold text-foreground">{name}</h1>
             <p className="text-lg text-primary font-medium">{role}</p>
           </div>
 
           <div className="p-6 md:p-8 space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Button asChild size="lg" className="w-full bg-gradient-to-r from-[#4ac94a] to-[#007a3d] text-white hover:text-white hover:shadow-lg transition-shadow rounded-xl">
+              <Button asChild size="lg" className="w-full rounded-xl">
                 <a href="/api/vcard">
                   <UserPlus className="mr-2 h-5 w-5" />
                   Add to Contacts
@@ -146,7 +146,7 @@ const ContactRow = ({ href, icon, label, value, isLink = false }: { href: string
 
 
 const SocialIcon = ({ href, icon, name }: { href: string; icon: React.ReactNode; name: string }) => (
-  <Button asChild variant="ghost" size="icon" className="rounded-full h-12 w-12 text-primary/80 hover:text-primary hover:bg-accent">
+  <Button asChild variant="ghost" size="icon" className="rounded-full h-12 w-12 text-muted-foreground hover:text-primary hover:bg-accent">
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visit our ${name} page`}>
       {icon}
     </a>

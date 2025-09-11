@@ -22,11 +22,11 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-dvh w-full flex-col items-center justify-center bg-muted/50 p-4 font-body">
+    <main className="flex min-h-dvh w-full flex-col items-center justify-center bg-background p-4 font-body">
       <div className="w-full max-w-md mx-auto mb-8">
         <div className="flex items-center justify-center gap-3">
             <Building className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold text-gray-800">{cardData.company}</h1>
+            <h1 className="text-3xl font-bold text-foreground">{cardData.company}</h1>
         </div>
       </div>
       <BusinessCard {...cardData} />
