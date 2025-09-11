@@ -12,6 +12,7 @@ import {
   UserPlus,
   Share2,
   QrCode,
+  Instagram,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,7 @@ interface BusinessCardProps {
     facebook?: string;
     linkedin?: string;
     youtube?: string;
+    instagram?: string;
   };
 }
 
@@ -53,7 +55,10 @@ export function BusinessCard({
     name,
     designation: role,
     cardUrl: appUrl,
-    company: company
+    company: company,
+    socials: {
+      instagram: socials.instagram,
+    }
   };
 
   return (
@@ -131,6 +136,7 @@ export function BusinessCard({
               {socials.facebook && <SocialIcon href={socials.facebook} icon={<Facebook />} name="Facebook" />}
               {socials.linkedin && <SocialIcon href={socials.linkedin} icon={<Linkedin />} name="LinkedIn" />}
               {socials.youtube && <SocialIcon href={socials.youtube} icon={<Youtube />} name="YouTube" />}
+              {socials.instagram && <SocialIcon href={socials.instagram} icon={<Instagram />} name="Instagram" />}
               <Button onClick={() => setQrModalOpen(true)} variant="ghost" size="icon" className="rounded-full h-12 w-12 text-primary hover:bg-accent">
                 <QrCode className="h-6 w-6" />
                 <span className="sr-only">Show QR Code</span>

@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Copy, Linkedin } from "lucide-react";
+import { Copy, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "./ui/input";
 
@@ -21,6 +21,9 @@ interface ShareDialogProps {
     designation: string;
     cardUrl: string;
     company: string;
+    socials: {
+      instagram?: string;
+    }
   };
 }
 
@@ -46,7 +49,7 @@ const SmsIcon = () => (
   </svg>
 );
 
-type SharePlatform = 'whatsapp' | 'sms' | 'linkedin' | null;
+type SharePlatform = 'whatsapp' | 'sms' | null;
 
 export function ShareDialog({ isOpen, onOpenChange, cardData }: ShareDialogProps) {
   const [selectedPlatform, setSelectedPlatform] = useState<SharePlatform>(null);
@@ -54,7 +57,8 @@ export function ShareDialog({ isOpen, onOpenChange, cardData }: ShareDialogProps
   const { toast } = useToast();
 
   const shareMessage = `${cardData.company} - ${cardData.designation} - ${cardData.name} - ${cardData.cardUrl}`;
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(cardData.cardUrl)}`;
+  
+  const instagramProfileUrl = cardData.socials.instagram;
 
   const handleShare = () => {
     if (selectedPlatform === 'whatsapp') {
@@ -81,10 +85,15 @@ export function ShareDialog({ isOpen, onOpenChange, cardData }: ShareDialogProps
   };
 
   const shareOptions = [
+    { name: "Copy Link", icon: <Copy className="h-full w-full" />, onClick: handleCopy, color: "text-gray-500" },
     { name: "WhatsApp", icon: <WhatsAppIcon />, onClick: () => setSelectedPlatform('whatsapp'), color: "text-green-500" },
     { name: "SMS", icon: <SmsIcon />, onClick: () => setSelectedPlatform('sms'), color: "text-blue-500" },
-    { name: "LinkedIn", icon: <Linkedin className="h-full w-full" />, href: linkedinUrl, color: "text-sky-600" },
   ];
+
+  if (instagramProfileUrl) {
+    shareOptions.push({ name: "Instagram", icon: <Instagram className="h-full w-full" />, href: instagramProfileUrl, color: "text-pink-600" });
+  }
+
 
   return (
     <Dialog open={isOpen} onOpenChange={reset}>
@@ -97,50 +106,25 @@ export function ShareDialog({ isOpen, onOpenChange, cardData }: ShareDialogProps
         </DialogHeader>
         <div className="space-y-4 py-4">
           {!selectedPlatform ? (
-            <>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                {shareOptions.map((option) => (
-                  <a
-                    key={option.name}
-                    href={option.href}
-                    onClick={option.onClick}
-                    target={option.href ? '_blank' : '_self'}
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center justify-center space-y-2 group cursor-pointer"
-                  >
-                    <div className={`p-4 rounded-xl bg-secondary group-hover:bg-accent transition-colors ${option.color}`}>
-                        <div className="h-6 w-6">{option.icon}</div>
-                    </div>
-                    <span className="text-xs font-medium text-muted-foreground">
-                      {option.name}
-                    </span>
-                  </a>
-                ))}
-              </div>
-
-              <div className="relative flex items-center pt-4">
-                  <div className="flex-grow border-t border-border"></div>
-                  <span className="flex-shrink mx-4 text-xs uppercase text-muted-foreground">Or copy link</span>
-                  <div className="flex-grow border-t border-border"></div>
-              </div>
-
-              <div className="flex w-full items-center space-x-2">
-                <Input
-                  id="copy-link"
-                  value={cardData.cardUrl}
-                  readOnly
-                  className="flex-1"
-                />
-                <Button
-                  type="button"
-                  size="icon"
-                  onClick={handleCopy}
+            <div className="grid grid-cols-4 gap-4 text-center">
+              {shareOptions.map((option) => (
+                <a
+                  key={option.name}
+                  href={option.href}
+                  onClick={option.onClick}
+                  target={option.href ? '_blank' : '_self'}
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center justify-center space-y-2 group cursor-pointer"
                 >
-                  <Copy className="h-4 w-4" />
-                  <span className="sr-only">Copy Link</span>
-                </Button>
-              </div>
-            </>
+                  <div className={`p-4 rounded-xl bg-secondary group-hover:bg-accent transition-colors ${option.color}`}>
+                      <div className="h-6 w-6">{option.icon}</div>
+                  </div>
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {option.name}
+                  </span>
+                </a>
+              ))}
+            </div>
           ) : (
             <div className="space-y-4">
               <Input
