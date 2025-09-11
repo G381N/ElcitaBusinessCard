@@ -1,4 +1,5 @@
 import { BusinessCard } from "@/components/business-card";
+import { Building } from "lucide-react";
 
 export default function Home() {
   // All personal data is dynamically sourced from environment variables.
@@ -11,7 +12,7 @@ export default function Home() {
     office: process.env.NEXT_PUBLIC_PERSON_OFFICE || "Your Office Address",
     photoUrl: process.env.NEXT_PUBLIC_PERSON_PHOTO_URL || "https://picsum.photos/seed/placeholder/400/400",
     appUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:9002",
-    company: process.env.NEXT_PUBLIC_COMPANY_NAME || "Your Company",
+    company: process.env.NEXT_PUBLIC_COMPANY_NAME || "ELCITA Ltd",
     socials: {
       facebook: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK,
       linkedin: process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN,
@@ -21,7 +22,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-dvh w-full items-center justify-center bg-muted/50 p-4 font-body">
+    <main className="flex min-h-dvh w-full flex-col items-center justify-center bg-muted/50 p-4 font-body">
+      <div className="w-full max-w-md mx-auto mb-8">
+        <div className="flex items-center justify-center gap-3">
+            <Building className="h-8 w-8 text-primary" />
+            <h1 className="text-3xl font-bold text-gray-800">{cardData.company}</h1>
+        </div>
+      </div>
       <BusinessCard {...cardData} />
     </main>
   );
