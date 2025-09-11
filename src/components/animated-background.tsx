@@ -1,25 +1,42 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+interface Bubble {
+  id: number;
+  x: string;
+  y: string;
+  size: number;
+  duration: number;
+  delay: number;
+  color: string;
+}
 
 const AnimatedBackground = () => {
-  const colors = [
-    "rgba(107, 142, 110, 0.2)",
-    "rgba(107, 142, 110, 0.3)",
-    "rgba(107, 142, 110, 0.1)",
-    "rgba(107, 142, 110, 0.25)",
-  ];
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
-  const bubbles = React.useMemo(() => Array.from({ length: 15 }).map((_, i) => ({
-    id: i,
-    x: `${Math.random() * 100}vw`,
-    y: `${Math.random() * 100}vh`,
-    size: Math.random() * 100 + 50,
-    duration: Math.random() * 20 + 15,
-    delay: Math.random() * 5,
-    color: colors[i % colors.length],
-  })), [colors]);
+  useEffect(() => {
+    const colors = [
+      "rgba(107, 142, 110, 0.2)",
+      "rgba(107, 142, 110, 0.3)",
+      "rgba(107, 142, 110, 0.1)",
+      "rgba(107, 142, 110, 0.25)",
+    ];
+
+    const generateBubbles = () =>
+      Array.from({ length: 15 }).map((_, i) => ({
+        id: i,
+        x: `${Math.random() * 100}vw`,
+        y: `${Math.random() * 100}vh`,
+        size: Math.random() * 100 + 50,
+        duration: Math.random() * 20 + 15,
+        delay: Math.random() * 5,
+        color: colors[i % colors.length],
+      }));
+
+    setBubbles(generateBubbles());
+  }, []);
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
