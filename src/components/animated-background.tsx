@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import React, { useState, useEffect } from "react";
 
 interface Bubble {
@@ -15,6 +15,26 @@ interface Bubble {
 
 const AnimatedBackground = () => {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const parallaxX = useTransform(mouseX, (v) => (v / (typeof window !== 'undefined' ? window.innerWidth : 1) - 0.5) * -100);
+  const parallaxY = useTransform(mouseY, (v) => (v / (typeof window !== 'undefined' ? window.innerHeight : 1) - 0.5) * -100);
+
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
     const colors = [
@@ -34,12 +54,19 @@ const AnimatedBackground = () => {
         delay: Math.random() * 5,
         color: colors[i % colors.length],
       }));
-
+    
     setBubbles(generateBubbles());
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
+    <motion.div 
+      className="absolute inset-0 w-full h-full overflow-hidden"
+      style={{
+        x: parallaxX,
+        y: parallaxY,
+      }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+    >
       {bubbles.map((bubble) => (
         <motion.div
           key={bubble.id}
@@ -66,7 +93,7 @@ const AnimatedBackground = () => {
           }}
         />
       ))}
-    </div>
+    </motion.div>
   );
 };
 

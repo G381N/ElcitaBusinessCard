@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-background p-4 font-body overflow-hidden">
+    <main className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-background p-4 font-body overflow-hidden" style={{ perspective: "1000px" }}>
       <AnimatedBackground />
       <div className="z-10 w-full max-w-md mx-auto mb-8">
         <div className="flex items-center justify-center gap-3">
