@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { QRCodeModal } from "@/components/qr-code-modal";
 import { ShareDialog } from "@/components/share-dialog";
-import type { SharingLinksInput } from "@/ai/flows/personalized-sharing-links";
 
 interface BusinessCardProps {
   name: string;
@@ -50,13 +49,11 @@ export function BusinessCard({
   const [isQrModalOpen, setQrModalOpen] = useState(false);
   const [isShareModalOpen, setShareModalOpen] = useState(false);
 
-  const cardDataForSharing: SharingLinksInput = {
+  const cardDataForSharing = {
     name,
     designation: role,
-    phone,
-    email,
-    office,
     cardUrl: appUrl,
+    company: company
   };
 
   return (
