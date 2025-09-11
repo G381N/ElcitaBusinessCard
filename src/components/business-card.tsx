@@ -63,84 +63,64 @@ export function BusinessCard({
 
   return (
     <>
-      <Card className="w-full max-w-sm rounded-2xl shadow-xl overflow-hidden border-2 border-primary/10">
+      <Card className="w-full max-w-md mx-auto rounded-3xl shadow-2xl overflow-hidden border-2 border-primary/10 bg-white/80 backdrop-blur-sm">
         <CardContent className="p-0">
-          <div className="bg-gradient-to-br from-green-100 via-white to-green-50 p-6 flex flex-col items-center text-center">
+          <div className="bg-gradient-to-br from-green-50 via-white to-green-100 p-8 flex flex-col items-center text-center">
             <div className="relative mb-4">
               <Image
                 src={photoUrl}
                 alt={`Photo of ${name}`}
-                width={128}
-                height={128}
+                width={144}
+                height={144}
                 className="rounded-full border-4 border-white shadow-lg"
                 data-ai-hint="portrait person"
               />
+               <div
+                onClick={() => setQrModalOpen(true)}
+                className="absolute bottom-0 right-0 bg-white rounded-full p-2 cursor-pointer shadow-md hover:bg-gray-100 transition-colors"
+                title="Show QR Code"
+              >
+                <QrCode className="h-6 w-6 text-primary" />
+              </div>
             </div>
-            <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
-            <p className="text-base text-primary font-medium">{role}</p>
+            <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
+            <p className="text-lg text-primary font-medium">{role}</p>
           </div>
 
-          <div className="p-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <Button asChild className="w-full bg-gradient-to-r from-[#4ac94a] to-[#007a3d] text-white hover:text-white hover:shadow-lg transition-shadow">
+          <div className="p-6 md:p-8 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Button asChild size="lg" className="w-full bg-gradient-to-r from-[#4ac94a] to-[#007a3d] text-white hover:text-white hover:shadow-lg transition-shadow rounded-xl">
                 <a href="/api/vcard">
-                  <UserPlus className="mr-2 h-4 w-4" />
+                  <UserPlus className="mr-2 h-5 w-5" />
                   Add to Contacts
                 </a>
               </Button>
               <Button
                 onClick={() => setShareModalOpen(true)}
                 variant="outline"
-                className="w-full"
+                size="lg"
+                className="w-full rounded-xl"
               >
-                <Share2 className="mr-2 h-4 w-4" />
-                Share
+                <Share2 className="mr-2 h-5 w-5" />
+                Share Card
               </Button>
             </div>
             
             <Separator />
 
             <div className="space-y-4 text-sm">
-              <a href={`tel:${phone}`} className="flex items-center gap-4 group">
-                <div className="bg-secondary p-3 rounded-full group-hover:bg-accent transition-colors">
-                  <Phone className="h-5 w-5 text-primary" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-muted-foreground">Phone</span>
-                  <span className="font-semibold text-foreground group-hover:underline">{`+${phone.slice(0, 2)} ${phone.slice(2)}`}</span>
-                </div>
-              </a>
-              <a href={`mailto:${email}`} className="flex items-center gap-4 group">
-                <div className="bg-secondary p-3 rounded-full group-hover:bg-accent transition-colors">
-                  <Mail className="h-5 w-5 text-primary" />
-                </div>
-                <div className="flex flex-col">
-                    <span className="font-medium text-muted-foreground">Email</span>
-                    <span className="font-semibold text-foreground group-hover:underline">{email}</span>
-                </div>
-              </a>
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office)}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                <div className="bg-secondary p-3 rounded-full group-hover:bg-accent transition-colors">
-                  <MapPin className="h-5 w-5 text-primary" />
-                </div>
-                <div className="flex flex-col">
-                    <span className="font-medium text-muted-foreground">Office</span>
-                    <span className="font-semibold text-foreground group-hover:underline">{office}</span>
-                </div>
-              </a>
+              <ContactRow href={`tel:${phone}`} icon={<Phone />} label="Phone" value={`+${phone.slice(0, 2)} ${phone.slice(2)}`} />
+              <ContactRow href={`mailto:${email}`} icon={<Mail />} label="Email" value={email} />
+              <ContactRow href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office)}`} icon={<MapPin />} label="Office" value={office} isLink={true} />
             </div>
             
             <Separator />
             
-            <div className="flex justify-center items-center gap-4">
-              {socials.facebook && <SocialIcon href={socials.facebook} icon={<Facebook />} name="Facebook" />}
-              {socials.linkedin && <SocialIcon href={socials.linkedin} icon={<Linkedin />} name="LinkedIn" />}
-              {socials.youtube && <SocialIcon href={socials.youtube} icon={<Youtube />} name="YouTube" />}
-              {socials.instagram && <SocialIcon href={socials.instagram} icon={<Instagram />} name="Instagram" />}
-              <Button onClick={() => setQrModalOpen(true)} variant="ghost" size="icon" className="rounded-full h-12 w-12 text-primary hover:bg-accent">
-                <QrCode className="h-6 w-6" />
-                <span className="sr-only">Show QR Code</span>
-              </Button>
+            <div className="flex justify-center items-center gap-2">
+              {socials.facebook && <SocialIcon href={socials.facebook} icon={<Facebook className="h-5 w-5"/>} name="Facebook" />}
+              {socials.linkedin && <SocialIcon href={socials.linkedin} icon={<Linkedin className="h-5 w-5"/>} name="LinkedIn" />}
+              {socials.youtube && <SocialIcon href={socials.youtube} icon={<Youtube className="h-5 w-5"/>} name="YouTube" />}
+              {socials.instagram && <SocialIcon href={socials.instagram} icon={<Instagram className="h-5 w-5"/>} name="Instagram" />}
             </div>
           </div>
         </CardContent>
@@ -151,6 +131,19 @@ export function BusinessCard({
     </>
   );
 }
+
+const ContactRow = ({ href, icon, label, value, isLink = false }: { href: string; icon: React.ReactNode; label: string; value: string; isLink?: boolean }) => (
+  <a href={href} target={isLink ? "_blank" : "_self"} rel={isLink ? "noopener noreferrer" : ""} className="flex items-center gap-4 group">
+    <div className="bg-secondary p-3 rounded-full group-hover:bg-accent transition-colors">
+      <div className="h-5 w-5 text-primary">{icon}</div>
+    </div>
+    <div className="flex flex-col">
+      <span className="font-medium text-muted-foreground">{label}</span>
+      <span className="font-semibold text-foreground group-hover:underline">{value}</span>
+    </div>
+  </a>
+);
+
 
 const SocialIcon = ({ href, icon, name }: { href: string; icon: React.ReactNode; name: string }) => (
   <Button asChild variant="ghost" size="icon" className="rounded-full h-12 w-12 text-primary/80 hover:text-primary hover:bg-accent">
