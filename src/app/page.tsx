@@ -26,10 +26,10 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex min-h-dvh w-full flex-col items-start justify-start md:items-center md:justify-center bg-background p-3 md:p-4 font-body overflow-hidden pt-8 md:pt-4">
+    <main className="relative flex min-h-dvh w-full flex-col items-start justify-start md:items-center md:justify-center bg-background p-3 md:p-4 font-body overflow-hidden pt-4 md:pt-4">
       <AnimatedBackground />
-      <div className="z-10 w-full max-w-md mx-auto mb-4 md:mb-6 mt-2 md:mt-0">
-        <div className="flex items-center justify-center gap-3 md:gap-4 pt-2 md:pt-0">
+      <div className="z-10 w-full max-w-md mx-auto mb-3 md:mb-6 mt-0 md:mt-0">
+        <div className="flex items-center justify-center gap-3 md:gap-4 pt-0 md:pt-0">
             <div className="flex-shrink-0 relative h-16 w-16 md:h-24 md:w-24">
               <Image
                 id="company-logo-en"
