@@ -40,8 +40,8 @@ const AnimatedBackground = () => {
             r="200"
             fill="url(#grad1)"
             animate={{
-              cx: [null, "80vw", "20vw"],
-              cy: [null, "70vh", "30vh"],
+              cx: ["20vw", "80vw", "20vw"],
+              cy: ["30vh", "70vh", "30vh"],
               scale: [1, 1.2, 1],
             }}
             transition={{ duration: 25, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
@@ -52,8 +52,8 @@ const AnimatedBackground = () => {
             r="250"
             fill="url(#grad2)"
             animate={{
-              cx: [null, "30vw", "80vw"],
-              cy: [null, "20vh", "60vh"],
+              cx: ["80vw", "30vw", "80vw"],
+              cy: ["60vh", "20vh", "60vh"],
               scale: [1, 1.1, 1],
             }}
             transition={{ duration: 30, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
