@@ -1,6 +1,8 @@
 import { BusinessCard } from "@/components/business-card";
 import { Building } from "lucide-react";
 import { AnimatedBackground } from "@/components/animated-background";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import Image from "next/image";
 
 export default function Home() {
   // All personal data is dynamically sourced from environment variables.
@@ -25,10 +27,31 @@ export default function Home() {
   return (
     <main className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-background p-4 font-body overflow-hidden">
       <AnimatedBackground />
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher />
+      </div>
       <div className="z-10 w-full max-w-md mx-auto mb-8">
         <div className="flex items-center justify-center gap-3">
-            <Building className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">{cardData.company}</h1>
+            <Image
+              id="company-logo-en"
+              src="/Elcita_logo.png"
+              alt="Elcita Logo"
+              width={80}
+              height={80}
+              className="h-16 w-16"
+            />
+            <Image
+              id="company-logo-kn"
+              src="/ELCITA-Kannada logo.png"
+              alt="Elcita Logo Kannada"
+              width={80}
+              height={80}
+              className="h-16 w-16 hidden"
+            />
+            <div>
+              <p id="company-name-kn" className="font-bold text-foreground text-sm"></p>
+              <p id="company-name-en" className="font-bold text-foreground text-sm"></p>
+            </div>
         </div>
       </div>
       <div className="z-10 w-full">

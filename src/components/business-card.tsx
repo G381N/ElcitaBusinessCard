@@ -82,12 +82,13 @@ export function BusinessCard({
                 onClick={() => setQrModalOpen(true)}
                 className="absolute bottom-0 right-0 bg-white dark:bg-slate-800 rounded-full p-2 cursor-pointer shadow-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                 title="Show QR Code"
+                data-translate-key="showQRCode"
               >
                 <QrCode className="h-6 w-6 text-primary" />
               </motion.div>
             </div>
             <h1 className="text-3xl font-bold text-foreground">{name}</h1>
-            <p className="text-lg text-primary font-medium">{role}</p>
+            <p className="text-lg text-primary font-medium" data-translate-key="role">{role}</p>
           </div>
 
           <div className="p-6 md:p-8 space-y-6">
@@ -96,7 +97,7 @@ export function BusinessCard({
                 <Button asChild size="lg" className="w-full rounded-xl">
                   <a href="/api/vcard">
                     <UserPlus className="mr-2 h-5 w-5" />
-                    Add to Contacts
+                    <span data-translate-key="addToContacts">Add to Contacts</span>
                   </a>
                 </Button>
               </motion.div>
@@ -108,7 +109,7 @@ export function BusinessCard({
                   className="w-full rounded-xl"
                 >
                   <Share2 className="mr-2 h-5 w-5" />
-                  Share Card
+                  <span data-translate-key="shareCard">Share Card</span>
                 </Button>
               </motion.div>
             </div>
@@ -116,9 +117,9 @@ export function BusinessCard({
             <Separator />
 
             <div className="space-y-4 text-sm">
-              <ContactRow href={`tel:${phone}`} icon={<Phone />} label="Phone" value={`+${phone.slice(0, 2)} ${phone.slice(2)}`} />
-              <ContactRow href={`mailto:${email}`} icon={<Mail />} label="Email" value={email} />
-              <ContactRow href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office)}`} icon={<MapPin />} label="Office" value={office} isLink={true} />
+              <ContactRow href={`tel:${phone}`} icon={<Phone />} label="Phone" value={`+${phone.slice(0, 2)} ${phone.slice(2)}`} translateKey="phone" />
+              <ContactRow href={`mailto:${email}`} icon={<Mail />} label="Email" value={email} translateKey="email" />
+              <ContactRow href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office)}`} icon={<MapPin />} label="Office" value={office} isLink={true} translateKey="office" />
             </div>
             
             <Separator />
@@ -139,7 +140,7 @@ export function BusinessCard({
   );
 }
 
-const ContactRow = ({ href, icon, label, value, isLink = false }: { href: string; icon: React.ReactNode; label: string; value: string; isLink?: boolean }) => (
+const ContactRow = ({ href, icon, label, value, isLink = false, translateKey }: { href: string; icon: React.ReactNode; label: string; value: string; isLink?: boolean; translateKey: string }) => (
     <motion.a 
         href={href} 
         target={isLink ? "_blank" : "_self"} 
@@ -152,7 +153,7 @@ const ContactRow = ({ href, icon, label, value, isLink = false }: { href: string
         <div className="h-5 w-5 text-primary">{icon}</div>
       </div>
       <div className="flex flex-col">
-        <span className="font-medium text-muted-foreground">{label}</span>
+        <span className="font-medium text-muted-foreground" data-translate-key={translateKey}>{label}</span>
         <span className="font-semibold text-foreground group-hover:underline">{value}</span>
       </div>
     </motion.a>

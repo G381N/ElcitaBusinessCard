@@ -1,0 +1,22 @@
+{
+  "en": {
+    "addToContacts": "Add to Contacts",
+    "shareCard": "Share Card",
+    "phone": "Phone",
+    "email": "Email",
+    "office": "Office",
+    "showQRCode": "Show QR Code",
+    "companyName": "Electronics City Industrial Township Authority",
+    "role": "Your Role"
+  },
+  "kn": {
+    "addToContacts": "ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಿ",
+    "shareCard": "ಕಾರ್ಡ್ ಹಂಚಿಕೊಳ್ಳಿ",
+    "phone": "ದೂರವಾಣಿ",
+    "email": "ಇಮೇಲ್",
+    "office": "ಕಚೇರಿ",
+    "showQRCode": "ಕ್ಯೂಆರ್ ಕೋಡ್ ತೋರಿಸಿ",
+    "companyName": "ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಸಿಟಿ ಇಂಡಸ್ಟ್ರಿಯಲ್ ಟೌನ್‌ಶಿಪ್ ಅಥಾರಿಟಿ",
+    "role": "ನಿಮ್ಮ ಪಾತ್ರ"
+  }
+}
