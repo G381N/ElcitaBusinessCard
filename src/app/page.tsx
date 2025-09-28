@@ -19,9 +19,9 @@ export default function Home() {
     company: process.env.NEXT_PUBLIC_COMPANY_NAME || "ELCITA Ltd",
     socials: {
       facebook: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK,
-      linkedin: process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN,
       youtube: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE,
       instagram: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM,
+      twitter: process.env.NEXT_PUBLIC_SOCIAL_TWITTER,
     },
   };
 

@@ -35,9 +35,9 @@ interface BusinessCardProps {
   company: string;
   socials: {
     facebook?: string;
-    linkedin?: string;
     youtube?: string;
     instagram?: string;
+    twitter?: string;
   };
 }
 
@@ -63,7 +63,10 @@ export function BusinessCard({
     cardUrl: appUrl,
     company: company,
     socials: {
+      facebook: socials.facebook,
+      youtube: socials.youtube,
       instagram: socials.instagram,
+      twitter: socials.twitter,
     }
   };
 
@@ -92,11 +95,11 @@ export function BusinessCard({
                 onClick={() => setQrModalOpen(true)}
                 className="absolute -bottom-1 -right-1 md:-bottom-2 md:-right-2 bg-white dark:bg-slate-800 rounded-full p-2 cursor-pointer shadow-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
               >
-                <QrCode className="h-3 w-3 md:h-4 md:w-4 text-primary" />
+                <QrCode className="h-3 w-3 md:h-4 md:w-4 text-black" />
               </motion.div>
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{name}</h1>
-            <p className="text-base md:text-lg text-primary font-medium" data-translate-key="role">{role}</p>
+            <p className="text-base md:text-lg text-primary font-medium">{role}</p>
           </div>
 
           <div className="px-6 pb-6 md:px-8 md:pb-8 space-y-6">
@@ -127,16 +130,16 @@ export function BusinessCard({
             <div className="space-y-4 text-sm">
               <ContactRow href={`tel:${phone}`} icon={<Phone />} label="Phone" value={`+${phone.slice(0, 2)} ${phone.slice(2)}`} translateKey="phone" />
               <ContactRow href={`mailto:${email}`} icon={<Mail />} label="Email" value={email} translateKey="email" />
-              <ContactRow href={officeMapLink} icon={<MapPin />} label="Office" value={office} isLink={true} translateKey="office" />
+              <ContactRow href={officeMapLink} icon={<MapPin />} label="Office" value={office} isLink={true} translateKey="office" valueClassName="text-xs md:text-sm whitespace-pre-line" />
             </div>
             
             <Separator />
             
             <div className="flex justify-center items-center gap-1 md:gap-2 flex-wrap">
-              {socials.facebook && <SocialIcon href={socials.facebook} icon={<Facebook className="h-4 w-4 md:h-5 md:w-5"/>} name="Facebook" />}
-              {socials.linkedin && <SocialIcon href={socials.linkedin} icon={<Linkedin className="h-4 w-4 md:h-5 md:w-5"/>} name="LinkedIn" />}
-              {socials.youtube && <SocialIcon href={socials.youtube} icon={<Youtube className="h-4 w-4 md:h-5 md:w-5"/>} name="YouTube" />}
-              {socials.instagram && <SocialIcon href={socials.instagram} icon={<Instagram className="h-4 w-4 md:h-5 md:w-5"/>} name="Instagram" />}
+              {socials.facebook && <SocialIcon href={socials.facebook} icon={<Facebook className="h-5 w-5"/>} name="Facebook" />}
+              {socials.youtube && <SocialIcon href={socials.youtube} icon={<Youtube className="h-5 w-5"/>} name="YouTube" />}
+              {socials.instagram && <SocialIcon href={socials.instagram} icon={<Instagram className="h-5 w-5"/>} name="Instagram" />}
+              {socials.twitter && <SocialIcon href={socials.twitter} icon={<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M17.5 3h3.5l-7.5 9 8 9H17.5l-6-7-6 7H3l7.5-9-8-9H6.5l6 7 6-7z"/></svg>} name="X" />}
             </div>
           </div>
         </CardContent>
@@ -148,7 +151,17 @@ export function BusinessCard({
   );
 }
 
-const ContactRow = ({ href, icon, label, value, isLink = false, translateKey }: { href: string; icon: React.ReactNode; label: string; value: string; isLink?: boolean; translateKey?: string }) => (
+interface ContactRowProps {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  isLink?: boolean;
+  translateKey?: string;
+  valueClassName?: string;
+}
+
+const ContactRow = ({ href, icon, label, value, isLink = false, translateKey, valueClassName }: ContactRowProps) => (
     <motion.a 
         href={href} 
         target={isLink ? "_blank" : "_self"} 
@@ -163,7 +176,7 @@ const ContactRow = ({ href, icon, label, value, isLink = false, translateKey }: 
       </div>
       <div className="flex flex-col min-w-0 flex-1">
         <span className="font-medium text-muted-foreground text-xs md:text-sm" data-translate-key={translateKey || ''}>{label}</span>
-        <span className="font-semibold text-foreground group-hover:text-primary transition-colors duration-200 truncate text-sm md:text-base">{value}</span>
+        <span className={`font-semibold text-foreground group-hover:text-primary transition-colors duration-200 truncate text-sm md:text-base ${valueClassName ? valueClassName : ''}`}>{value}</span>
       </div>
     </motion.a>
   );

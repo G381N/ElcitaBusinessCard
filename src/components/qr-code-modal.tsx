@@ -31,7 +31,7 @@ export function QRCodeModal({ isOpen, onOpenChange, url }: QRCodeModalProps) {
         margin: 2,
         width: 300,
         color: {
-          dark: "#1a73e8", // primary color
+          dark: "#000000", // black QR code
           light: "#FFFFFF",
         }
       })
