@@ -1,4 +1,4 @@
-# ELCITA Ltd Business Card
+# ELCITA Ltd Business Card made for Elcita
 
 This repository contains a **Next.js** project hosted on **Firebase Studio**.  
 It provides a template for creating online business cards for **ELCITA Ltd** staff.  
